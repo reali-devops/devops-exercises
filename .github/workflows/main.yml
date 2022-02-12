@@ -34,16 +34,14 @@ jobs:
     steps:
     - uses: actions/checkout@v1
 
-    - name: 'Deploy'
-      uses: 'deliverybot/helm@v1.7.0'
-      with:
-        release: 'app-chart'
-        namespace: 'default'
-        chart: 'app'
-        token: '${{ github.token }}'
-        value-files: >-
-          [
-          "app-chart/values.yaml"
-          ]
+    - name: Install requirements
+      shell: bash
+      run: |
+          curl https://baltocdn.com/helm/signing.asc | sudo apt-key add -
+          sudo apt-get install apt-transport-https --yes
+          echo "deb https://baltocdn.com/helm/stable/debian/ all main" | sudo tee /etc/apt/sources.list.d/helm-stable-debian.list
+          sudo apt-get update
+          sudo apt-get install helm
+          helm install app-chart app-chart -f app-chart/values.yaml
       env:
         KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
