@@ -1,0 +1,7 @@
+
+deployment:
+  deployment_name: reali-app-deployment
+  app_name: reali_app
+  image:
+    name: erzez/reali_app
+    tag: latest
