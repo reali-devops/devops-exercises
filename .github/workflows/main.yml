@@ -47,4 +47,4 @@ jobs:
        env:
         KUBE_CONFIG_DATA: ${{ secrets.KUBECONFIG }}
        with:
-          command: helm upgrade monitoring --install --wait app-chart -f app-chart/values.yaml
+          command: helm upgrade app-chart --install --wait app-chart -f app-chart/values.yaml
