@@ -20,5 +20,5 @@ spec:
         app: {{ .Values.deployment.app_name }}
     spec:
       containers:
-      - name: {{ .Values.deployment.image.name }}
-        image: {{ .Values.deployment.image.tag }}
+      - name: {{ .Values.deployment.app_name }}
+        image: {{ .Values.deployment.image.name }}:{{ .Values.deployment.image.tag }}
