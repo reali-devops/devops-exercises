@@ -27,3 +27,11 @@ jobs:
         with:
           push: true
           tags: erzez/reali-app:latest
+      - 
+        name: 'Deploy'
+        uses: 'deliverybot/helm@master'
+        with:
+          token: '${{ github.token }}'
+          chart: 'app'
+        env:
+          KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
