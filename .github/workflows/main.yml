@@ -27,6 +27,10 @@ jobs:
         with:
           push: true
           tags: erzez/reali-app:latest
+  
+  helm:
+    runs-on: ubuntu-latest
+    steps:
       - 
         name: 'Deploy'
         uses: 'deliverybot/helm@master'
