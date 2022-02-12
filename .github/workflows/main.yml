@@ -38,11 +38,11 @@ jobs:
     
     - uses: peymanmortazavi/eks-helm-deploy@v2
       with:
-        aws-access-key-id: ${{ secrets.AWS_ACCESS__KEY_ID }}
+        namespace: default        
         aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-access-key-id: ${{ secrets.AWS_ACCESS__KEY_ID }}        
         aws-region: us-east-1
         chart-path: app-chart
         cluster-name: extravagant-mushroom-1644660144.us-east-1.eksctl.io
         config-files: app-chart/values.yml
-        namespace: default
         name: app
