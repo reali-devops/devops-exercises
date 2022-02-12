@@ -29,13 +29,21 @@ jobs:
           tags: erzez/reali-app:latest
   
   helm:
-    runs-on: ubuntu-latest
+    runs-on: 'ubuntu-latest'
     needs: docker
     steps:
-      - name: deploy postgres to cluster
-        uses: wahyd4/kubectl-helm-action@master
-        env:
-          KUBE_CONFIG_DATA: ${{ secrets.KUBE_CONFIG_DATA }}
-        with:
-          args: |
-            helm install app-chart app-chart -f app-chart/values.yaml
+    - uses: actions/checkout@v1
+
+    - name: 'Deploy'
+      uses: 'deliverybot/helm@v1.7.0'
+      with:
+        release: 'app-chart'
+        namespace: 'default'
+        chart: 'app'
+        token: '${{ github.token }}'
+        value-files: >-
+          [
+          "app-chart/values.yaml"
+          ]
+      env:
+        KUBECONFIG_FILE: '${{ secrets.KUBECONFIG }}'
